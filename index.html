@@ -22,7 +22,30 @@
 <body>
     <h1>New Zealand Map and Weather Data</h1>
     <!--container for map-->
-    <div id="leafletMap"></div>
+    
+
+    <div class ="grid_wrapper">
+      <!--grid box C1 for leaflet Map-->
+      <div class="box C1">
+        <div id="leafletMap"></div>
+      </div>
+      <!--grid box C2 for city input-->
+      <div class="box C2">
+        <h2>Enter NZ city name:</h2>
+        City name: <input type="text" id="city" placeholder="eg: Auckland"><br>
+        <button type="submit" onclick="Javascript: getGeocode()">Submit</button>
+        <h2>Recent Searches:</h2>
+      </div>
+      <!--grid box C3 for city information output-->
+      <div class="box C3">
+        <h2>Information:</h2>
+        <p id="cityInfo">output here</p>
+      </div>
+      <!--grid box C4 for recent searches-->
+      <div class="box C4">
+        
+      </div>
+    </div>
 
   <script src="js/leaflet.js"></script>
 </body>
