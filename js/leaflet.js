@@ -7,7 +7,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 id: 'mapbox.streets' 
 }).addTo(mymap);
 
-
+//function to get geo coords from user input (City Name)
 function getGeocode(){
 
 	var cityInput = document.getElementById("city").value;
@@ -21,7 +21,7 @@ function getGeocode(){
 
     fetch("http://www.mapquestapi.com/geocoding/v1/address?key=pWuhUoVNcKwGGZdK5G1HyIbvArOc1Cxf&location="+cityInput+",NZ")
     .then(response => response.json())
-    .then(json => initMap(json));
+	.then(json => initMap(json));
 
     var initMap = function (latLng) {
         city.lat = latLng.results["0"].locations["0"].latLng.lat;
@@ -36,14 +36,65 @@ function getGeocode(){
         list.push({lat,lng,city});
         console.log(list);
         
-        fetch("../php/sunriseSunset.php?key="+city+"&lat="+lat+"&lng"+lng)
-        .then(response => showInfo(response));        
-    }
-    //method to show sunrise / sunset information
-    var showInfo = function(response) {
-        var element = document.getElementById("cityInfo");
-        console.log(response);
-        element.innerHTML = response;
+        fetch("php/sunriseSunset.php?key="+city+"&lat="+lat+"&lng="+lng)
+        .then(response => response.json())
+	    .then(json => showInfo(json));
     };
 
+    //method to show sunrise / sunset information
+    var showInfo = function(response) {
+        var title = document.getElementById("title");
+        var sunrise = document.getElementById("sunrise");
+        var sunset = document.getElementById("sunset");
+        console.log(response.results);
+        
+        //conSunrise = Date.parse(response.results.sunrise);
+        var sunRtime = response.results.sunrise;
+        console.log(sunRtime);
+        title.innerHTML = "Weather Information:  "+city.city;
+        sunrise.innerHTML = response.results.sunrise;
+        sunset.innerHTML = response.results.sunset;
+        getWeather();
+    };
+
+    //method to get weather data using ajax function
+    var getWeather = function () {
+        var url = "php/weather.php?lat="+city.lat+"&lng="+city.lng;
+        ajaxRequest("GET", url, true, "", displayWeather);
+    };
+
+    //display weather information min tmep, max temp, icon etc
+    var displayWeather = function (response) {
+        var minTemp = document.getElementById("minTemp");
+        var maxTemp = document.getElementById("maxTemp");
+        var weatherDesc = document.getElementById("description");
+        var pic = document.getElementById("wimg");
+
+        let parser = new DOMParser();
+        xmlDoc = parser.parseFromString(response,"text/xml");
+
+        let main = xmlDoc.getElementsByTagName("temperature")[0];
+        let weather = xmlDoc.getElementsByTagName("weather")[0];
+        
+        
+        console.log(xmlDoc);
+
+        let min = main.getAttribute('min');
+        let max = main.getAttribute('max');
+        let wdesc = weather.getAttribute('value');
+        let weathericon = weather.getAttribute('icon');
+
+        //covert from kelvin to celsius
+        let minCels = (min - 273.15).toFixed(2); 
+        let maxCels = (max - 273.15).toFixed(2);
+        
+        //populate html elements with data
+        pic.src = 'http://openweathermap.org/img/w/'+weathericon+'.png';
+        minTemp.innerHTML = minCels;
+        maxTemp.innerHTML = maxCels;
+        weatherDesc.innerHTML = wdesc;
+        //setting url for weather icon
+        
+    };
 }
+

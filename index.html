@@ -38,9 +38,29 @@
       </div>
       <!--grid box C3 for city information output-->
       <div class="box C3">
-        <h2>Information:</h2>
-        <p id="cityInfo">output here</p>
+        <h2 id="title">Weather Information:</h2>
+        <!--Table for Data Output-->
+        <table id="tableOutput">         
+          <tr>
+            <th></th>
+            <th>Sunrise</th>
+            <th>Sunset</th>
+            <th>Min Temperature</th>
+            <th>Max Temperature</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td><img id="wimg"></td>
+            <td id="sunrise"></td>
+            <td id="sunset"></td>
+            <td id="minTemp"></td>
+            <td id="maxTemp"></td>
+            <td id="description"></td>            
+          </tr>
+        </table>
+
       </div>
+
       <!--grid box C4 for recent searches-->
       <div class="box C4">
         
@@ -48,5 +68,6 @@
     </div>
 
   <script src="js/leaflet.js"></script>
+  <script src="js/script.js"></script>
 </body>
 </html>
