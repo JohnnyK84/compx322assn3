@@ -4,7 +4,7 @@
     $lng = $_GET["lng"];
     //$city =$_GET["city"];
 
-    $url = "https://api.sunrise-sunset.org/json?lat=".$lat."&lng=".$lng;
+    $url = "https://api.sunrise-sunset.org/json?lat=".$lat."&lng=".$lng."&formatted=0";
 
     //init cURL parse in url and execute
     $process = curl_init($url);

@@ -8,6 +8,10 @@ body {
     width: 100%    
 }
 
+h1 {
+    text-align: center;
+}
+
 #leafletMap { 
     height: 380px; 
 }
@@ -44,4 +48,16 @@ th {
 
 td {
     text-align: center;
+}
+
+button {
+    margin-top: 1em;
+    margin-left: 100px;
+    width: 100px;
+    height: 30px;
+    background-color: rgb(106, 255, 106)
+}
+
+#recentList tr:hover {
+    cursor: pointer;
 }

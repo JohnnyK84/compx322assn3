@@ -35,27 +35,29 @@
         City name: <input type="text" id="city" placeholder="eg: Auckland"><br>
         <button type="submit" onclick="Javascript: getGeocode()">Submit</button>
         <h2>Recent Searches:</h2>
+        <div id="recentList">
+        </div>        
       </div>
       <!--grid box C3 for city information output-->
       <div class="box C3">
         <h2 id="title">Weather Information:</h2>
         <!--Table for Data Output-->
         <table id="tableOutput">         
-          <tr>
-            <th></th>
+          <tr>            
             <th>Sunrise</th>
             <th>Sunset</th>
-            <th>Min Temperature</th>
-            <th>Max Temperature</th>
+            <th>Min Temperature &#176</th>
+            <th>Max Temperature &#176</th>
             <th>Description</th>
+            <th></th>
           </tr>
-          <tr>
-            <td><img id="wimg"></td>
+          <tr>            
             <td id="sunrise"></td>
             <td id="sunset"></td>
             <td id="minTemp"></td>
             <td id="maxTemp"></td>
             <td id="description"></td>            
+            <td><img id="wimg"></td>
           </tr>
         </table>
 
@@ -69,5 +71,6 @@
 
   <script src="js/leaflet.js"></script>
   <script src="js/script.js"></script>
+  <script src="js/moment.js"></script>
 </body>
 </html>
